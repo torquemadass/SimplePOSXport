@@ -25,9 +25,10 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 
 // Import generated assets
-import espressoImg from "@assets/generated_images/espresso_cup_on_saucer.png";
-import croissantImg from "@assets/generated_images/fresh_croissant.png";
-import matchaImg from "@assets/generated_images/iced_matcha_latte.png";
+import originalImg from "@assets/TTR_ORI.png";
+import bbqImg from "@assets/TTR_BBQ.png";
+import hotSpicyImg from "@assets/TTR_HS.png";
+import bundlingImg from "@assets/TTR_BNDL.png";
 
 interface Product {
   id: number;
@@ -52,24 +53,31 @@ interface Sale {
 const INITIAL_PRODUCTS: Product[] = [
   {
     id: 1,
-    name: "Espresso Single",
-    price: 3.50,
-    image: espressoImg,
-    category: "Coffee",
+    name: "Original",
+    price: 35000,
+    image: originalImg,
+    category: "Chicken",
   },
   {
     id: 2,
-    name: "Butter Croissant",
-    price: 4.25,
-    image: croissantImg,
-    category: "Pastry",
+    name: "BBQ",
+    price: 35000,
+    image: bbqImg,
+    category: "Chicken",
   },
   {
     id: 3,
-    name: "Iced Matcha Latte",
-    price: 5.75,
-    image: matchaImg,
-    category: "Tea",
+    name: "Hot n Spicy",
+    price: 35000,
+    image: hotSpicyImg,
+    category: "Chicken",
+  },
+  {
+    id: 4,
+    name: "3 Box Bundling",
+    price: 90000,
+    image: bundlingImg,
+    category: "Bundle",
   },
 ];
 
@@ -229,12 +237,12 @@ export default function POS() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Price ($)</label>
+                      <label className="text-sm font-medium">Price (Rp)</label>
                         <Input
                           type="number"
                           value={newProductPrice}
                           onChange={(e) => setNewProductPrice(e.target.value)}
-                          placeholder="0.00"
+                          placeholder="0"
                         />
                       </div>
                     </div>
@@ -262,7 +270,7 @@ export default function POS() {
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-medium truncate text-lg">{product.name}</h3>
-                      <p className="text-muted-foreground">${product.price.toFixed(2)}</p>
+                      <p className="text-muted-foreground">Rp {product.price.toLocaleString()}</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -284,7 +292,7 @@ export default function POS() {
                       <TableHead>Transaction ID</TableHead>
                       <TableHead>Date</TableHead>
                       <TableHead>Items</TableHead>
-                      <TableHead>Total</TableHead>
+                          <TableHead>Total (Rp)</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -300,7 +308,7 @@ export default function POS() {
                           <TableCell className="font-mono text-xs">{sale.id}</TableCell>
                           <TableCell>{sale.date}</TableCell>
                           <TableCell className="max-w-[200px] truncate" title={sale.items}>{sale.items}</TableCell>
-                          <TableCell className="font-bold">${sale.total.toFixed(2)}</TableCell>
+                          <TableCell className="font-bold">Rp {sale.total.toLocaleString()}</TableCell>
                         </TableRow>
                       ))
                     )}
@@ -338,7 +346,7 @@ export default function POS() {
                 <div className="flex-1 min-w-0">
                   <h4 className="font-medium truncate">{item.name}</h4>
                   <p className="text-sm text-muted-foreground">
-                    ${item.price.toFixed(2)}
+                    Rp {item.price.toLocaleString()}
                   </p>
                 </div>
                 
@@ -371,18 +379,9 @@ export default function POS() {
 
         <div className="p-6 bg-secondary/30 border-t space-y-4">
           <div className="space-y-2">
-            <div className="flex justify-between text-sm text-muted-foreground">
-              <span>Subtotal</span>
-              <span>${cartTotal.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between text-sm text-muted-foreground">
-              <span>Tax (8%)</span>
-              <span>${(cartTotal * 0.08).toFixed(2)}</span>
-            </div>
-            <Separator className="my-2" />
             <div className="flex justify-between text-xl font-bold text-foreground">
               <span>Total</span>
-              <span>${(cartTotal * 1.08).toFixed(2)}</span>
+              <span>Rp {cartTotal.toLocaleString()}</span>
             </div>
           </div>
 
@@ -392,7 +391,7 @@ export default function POS() {
             disabled={cart.length === 0}
             onClick={handleCheckout}
           >
-            Charge ${(cartTotal * 1.08).toFixed(2)}
+            Charge Rp {cartTotal.toLocaleString()}
           </Button>
         </div>
       </aside>
