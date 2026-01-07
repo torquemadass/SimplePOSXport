@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Trash2, Coffee, Download, CreditCard, PackagePlus, History, ShoppingCart } from "lucide-react";
+import { Plus, Trash2, Download, CreditCard, PackagePlus, History, ShoppingCart } from "lucide-react";
 import * as XLSX from "xlsx";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -184,9 +184,9 @@ export default function POS() {
         <header className="h-16 border-b bg-card flex items-center justify-between px-6 shrink-0">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-              <Coffee className="h-6 w-6" />
+              <img src="/logo_tartaruga.png" alt="logo-tartaruga" className="h-10 w-10 object-contain"/>
             </div>
-            <h1 className="text-xl font-heading font-bold tracking-tight">SwiftPOS</h1>
+            <h1 className="text-xl font-heading font-bold tracking-tight">TartarugaPOS</h1>
           </div>
 
           <div className="flex gap-2 bg-secondary/50 p-1 rounded-lg">
